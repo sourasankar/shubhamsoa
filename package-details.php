@@ -154,7 +154,6 @@ foreach($results as $result)
 					{?>
 						<li class="spe" align="center">
 					<button type="submit" name="submit2" class="btn-primary btn">Book</button>
-					<a href="pay.php" class="view">Details</a>
 						</li>
 						<?php } else {?>
 							<li class="sigi" align="center" style="margin-top: 1%">
