@@ -9,6 +9,7 @@ $useremail=$_SESSION['login'];
 $fromdate=$_POST['fromdate'];
 $todate=$_POST['todate'];
 $comment=$_POST['comment'];
+$pkg_price=$_POST["pkg_price"];
 $status=0;
 $sql="INSERT INTO tblbooking(PackageId,UserEmail,FromDate,ToDate,Comment,status) VALUES(:pid,:useremail,:fromdate,:todate,:comment,:status)";
 $query = $dbh->prepare($sql);
@@ -23,6 +24,9 @@ $lastInsertId = $dbh->lastInsertId();
 if($lastInsertId)
 {
 $msg="Booked Successfully";
+$_SESSION["comment"]=$comment;
+$_SESSION["total_pkg_price"]=$pkg_price*$todate;
+header("Location: pay.php" );
 }
 else 
 {
@@ -123,14 +127,14 @@ foreach($results as $result)
 				<input class="date" id="datepicker" type="text" placeholder="dd-mm-yyyy"  name="fromdate" required="">
 			</div>
 			<div class="bnr-right">
-				<label class="inputLabel">To</label>
-				<input class="date" id="datepicker1" type="text" placeholder="dd-mm-yyyy" name="todate" required="">
+				<label class="inputLabel">Number of Passengers</label>
+				<input class="special" type="number" name="todate" required="">
 			</div>
 			</div>
 						<div class="clearfix"></div>
 				<div class="grand">
 					<p>Grand Total</p>
-					<h3>USD.800</h3>
+					<h3>Rs <?php echo htmlentities($result->PackagePrice);?><input type="hidden" name="pkg_price" value="<?php echo htmlentities($result->PackagePrice); ?>"></h3>
 				</div>
 			</div>
 		<h3>Package Details</h3>
@@ -150,6 +154,7 @@ foreach($results as $result)
 					{?>
 						<li class="spe" align="center">
 					<button type="submit" name="submit2" class="btn-primary btn">Book</button>
+					<a href="pay.php" class="view">Details</a>
 						</li>
 						<?php } else {?>
 							<li class="sigi" align="center" style="margin-top: 1%">

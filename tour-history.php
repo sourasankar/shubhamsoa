@@ -121,7 +121,7 @@ $error="You can't cancel booking before 24 hours";
 <th>Booking Id</th>
 <th>Package Name</th>	
 <th>From</th>
-<th>To</th>
+<th>Person Count</th>
 <th>Comment</th>
 <th>Status</th>
 <th>Booking Date</th>
